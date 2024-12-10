@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arguments</title>
+</head>
+<body>
+    <script>
+        function showArguments(){
+            console.log(arguments);
+            console.log(arguments[0]);
+            console.log(arguments[1]);
+        }
+
+        showArguments(10,20);
+        showArguments("안녕",20);
+
+        const add = (a,b) => {
+            // => 모양의 함수는 즉시실행한다는 뜻
+            // => 함수는 arguments 값을 실행시키지 않는다.
+        }
+    </script>
+</body>
+</html>
