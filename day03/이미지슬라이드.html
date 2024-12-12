@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이미지슬라이드</title>
+    <style>
+        img {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
+    <div>
+        <p>
+            <img src="./img/picture_1.jpg" alt="" id="photo">
+        </p>
+        <div>
+            <button onclick="gallery(0)">이전</button>
+            <button onclick="gallery(1)">다음</button>
+        </div>
+    </div>
     <script>
         /*
         현재 보여지는 이미지 번호를 저장하는 변수를 생성 (처음에는 1)
@@ -24,6 +39,25 @@
                 num을 감소
         }
         */
+
+        let num = 1;
+        function gallery(direct){
+            if(direct){
+                if(num == 8){
+                    return;
+                } else {
+                    num++;
+                }
+            } else {
+                if(num == 1){
+                    return;
+                } else {
+                    num--;
+                }
+            }
+            let imgTag = document.getElementById("photo");
+            imgTag.setAttribute("src","img/picture_" + num + ".jpg");
+        }
     </script>
 </body>
 </html>
