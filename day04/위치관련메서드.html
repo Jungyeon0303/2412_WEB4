@@ -10,12 +10,17 @@
     <button onclick="showWindowSize()">브라우저 크기 보기</button>
     <p id="window_size"></p>
 
+    <hr>
+
     <!-- innerHTML -->
      <div id="content">
         <p>이 내용이 바뀔거에요!</p>
      </div>
      <button onclick="changeContet()">innerHTML 내용바꾸기기</button>
 
+     <hr>
+
+     
      <!-- textContent -->
       <div id="text_example">
         <p>
@@ -30,6 +35,8 @@
 
       <input type="text" id="name" value="기본값">
       <button onclick="updateValue()">값 변경하기</button>
+
+      <hr>
 
       <!-- offsetHeight, clientHeight,scrollHeight -->
        <div 
@@ -46,16 +53,19 @@
        <button onclick="showHeight()">높이 정보</button>
        <button>너비 정보</button>
 
+       <hr>
+
        <!-- getBoundingClientRect() -->
         <div 
             id="target"
             style="
                 width: 200px;
                 height: 100px;
-                background-color: chocolate;
+                background-color: rgb(187, 238, 187);
             ">
              위치와 크기를 확인할 박스
         </div>
+        <button onclick="showRect()">박스 정보 보기</button>
     <script>
         /*
         1. 브라우저 창 관련 속성
@@ -112,6 +122,25 @@
                 scrollHeight : ${box.scrollHeight}px`
                 
             )
+        }
+
+        function showWidth(){
+            const box = document.getElementById("box");
+            alert(
+                `offsetWidth : ${box.offsetWidth}px \n
+                clientWidth : ${box.clientWidth}px \n
+                scrollWidth : ${box.scrollWidth}px`
+            );
+        }
+
+
+
+        //getBoundingClientRect
+        function showRect(){
+            const box = document.getElementById("target");
+            const rect = box.getBoundingClientRect();
+            //x,y,width,height,top,left
+            alert(`위치:x ${rect.x}, y ${rect.y}, \n크기 : width: ${rect.width}px, height: ${rect.height}px, \n 위치: top${rect.top}, left${rect.left}`)
         }
     </script>
 </body>
