@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더 컬러변경</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(186, 221, 194);
+            height: 2000px;
+        }
+
+        header {
+            height: 80px;
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            width: 100%;
+            position: fixed;
+            color: #fff;
+            transition: 0.5s;
+        }
+
+        ul {
+            display: flex;
+        }
+
+        li {
+            list-style: none;
+            padding: 15px;
+            font-weight: 500;
+        }
+
+        .log_btn {
+            margin-right: 24px;
+        }
+
+        .log_btn > button {
+            background-color: #fff;
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: 0;
+            font-weight: 800;
+        }
+
+        .header_active {
+            background-color: beige;
+        }
+
+        .header_scroll_color {
+            color: #222;
+        }
+
+        .log_btn > .header_button_active {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <h1 class="header_scroll_color_change">비비고</h1>
+        <ul id="menu">
+            <li class="header_scroll_color_change">한식</li>
+            <li class="header_scroll_color_change">중식</li>
+            <li class="header_scroll_color_change">일식</li>
+            <li class="header_scroll_color_change">양식</li>
+        </ul>
+        <div class="log_btn">
+            <button>로그인</button>
+            <button>회원가입</button>
+        </div>
+    </header>
+
+    <script>
+        const header = document.getElementById("header");
+
+        let headerHeight = header.offsetHeight;
+        console.log(headerHeight);
+
+        const headerColorChange = document.querySelectorAll(".header_scroll_color_change");
+      
+        const buttons = document.querySelectorAll(".log_btn button")
+      
+        window.addEventListener("scroll",(e) => {
+            let scrollHeight = window.scrollY;
+            if(scrollHeight > headerHeight){
+                header.classList.add("header_active");
+                headerColorChange.forEach((element) => {
+                    element.classList.add("header_scroll_color");
+                });
+                buttons.forEach((element) => {
+                    element.classList.add("header_button_active")
+                })
+            } else{
+                header.classList.remove("header_active");
+                headerColorChange.forEach((element) => {
+                    element.classList.remove("header_scroll_color");
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>
