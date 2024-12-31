@@ -72,7 +72,7 @@
 
         .dot_box {
             display: flex;
-            margin: 0 auto;
+           
         }
 
         .dot {
@@ -82,16 +82,20 @@
             background-color: rgb(153, 194, 194);
             margin: 8px;
         }
+
+        .active {
+            background-color: darkgreen;
+        }
     </style>
 </head>
 <body>
     <div class="slide_container">
         <ul class="slide">
-            <li class="slider_01">1</li>
-            <li class="slider_02">2</li>
-            <li class="slider_03">3</li>
-            <li class="slider_04">4</li>
-            <li class="slider_05">5</li>
+            <li class="slider_01"><img src="./겨울1.jpg"></li>
+            <li class="slider_02"><img src="./겨울2.jpg"></li>
+            <li class="slider_03"><img src="./겨울3.png"></li>
+            <li class="slider_04"><img src="./겨울4.jpg"></li>
+            <li class="slider_05"><img src="./겨울5.webp"></li>
         </ul>
     </div>
     <div class="slide_btns">
@@ -106,14 +110,14 @@
         const slide = document.querySelector('.slide'); // ul
         const dotBox = document.querySelector('.dot_box'); // 닷이 들어갈 비어있는 div
         const sliderWidth = 1000;
-        let moveCheck = ture;
+        let moveCheck = true;
 
         //================================================================
 
         const first = slide.firstElementChild.cloneNode(true);
         // firstElementChild : 현재 요소의 첫 번째 자식 요소를 반환함
         
-        const last = slide.lastElementChild.cloneNode(treu);
+        const last = slide.lastElementChild.cloneNode(true);
         // lastElementChild : 현재 요소의 마지막 자식요소를 반환
         // cloneNode(true) : 선택된 요소와 그 모든 자식요소를 복제함함
 
@@ -136,8 +140,9 @@
         //==============================================================
 
         function moveSlide(time){
-            slide.style.transition = 1000 + 'ms'; // time(1000) -> 1000ms;(1초)
+            slide.style.transition = time + 'ms'; // time(1000) -> 1000ms;(1초)
             slide.style.transform = `translateX(-${index * sliderWidth}px)`;
+            updateDot();
         }
         //===============================================================
         // 버튼 클릭함수
@@ -149,8 +154,62 @@
             if(moveCheck){
                 moveCheck = false;
                 index--;
+                setTimeout(()=>{
+                    if(index === 0){
+                        index = slide.sliderLength -2;
+                        moveSlide(0);
+                    }
+                    moveCheck = true;
+                }, 1000);
+                moveSlide(1000); // 1초동안 moveCheck를 막음
             }
         }
+
+        function next(){
+            if(moveCheck){
+                moveCheck = false;
+                index++;
+                setTimeout(()=>{
+                    if(index === slide.sliderLength -1){
+                        index = 1;
+                        moveSlide(0);
+                    }
+                    moveCheck = true;
+                }, 1000);
+                moveSlide(1000);
+            }
+        }
+
+        //======================================================
+        // 닷 만들기
+        for(let i = 0; i < sliderLength -2; i++){
+            const makeDiv = document.createElement('div'); // div 태그생성
+            makeDiv.classList.add('dot');
+            dotBox.appendChild(makeDiv);
+            makeDiv.addEventListener('click',()=> {
+                index = i + 1;
+                moveSlide(1000);
+            });
+        }
+        dotBox.children[0].classList.add('active');
+
+        function updateDot(){
+            for(let i = 0; i < sliderLength -2; i++){
+                dotBox.children[i].classList.remove('active');
+                if(index === 0){
+                    dotBox.children[sliderLength - 3].classList.add('active');
+                } else if(index === sliderLength -1){
+                    dotBox.children[0].classList.add('active');
+                } else {
+                    dotBox.children[index -1].classList.add('active');
+                }
+            }
+        }
+
+        setInterval(() => {
+
+        }) 
+
         </script>
 </body>
 </html>
