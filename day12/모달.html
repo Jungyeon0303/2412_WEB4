@@ -33,10 +33,47 @@
     <button id="open_modal">
         모달 열기
     </button>
+  
     <div class="overlay" id="overlay"></div>
+  
     <div id="modal" class="modal">
         <p>모달이 열렸습니다!</p>
         <button id="close_modal">모달 닫기</button>
     </div>
+
+    <script>
+        const openModal = document.getElementById('open_modal');
+        const overlay = document.getElementsById('overlay');
+        const modal = document.getElementById('modal');
+        const closeModal = document.getElementById('close_modal');
+
+        openModal.addEventListener('click',function(){
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // closeModal.addEventListener('click',function(){
+        //     modal.style.display = 'none';
+        //     overlay.style.display = 'none';
+        // });
+
+        function closeModalFunction(){
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        CloseModal.addEventListener('click', function(){
+            closeModalFunction();
+        });
+
+        document.addEventListener('keydown',function(){
+            if(event.key === 'Escape'){
+            closeModalFunction();
+            }
+        })
+
+
+
+    </script>
 </body>
 </html>
